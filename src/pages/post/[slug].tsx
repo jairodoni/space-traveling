@@ -1,34 +1,100 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+// import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { getPrismicClient } from '../../services/prismic';
+// import { getPrismicClient } from '../../services/prismic';
 
 import commonStyles from '../../styles/common.module.scss';
+import Head from 'next/head';
+import { FiCalendar, FiUser, FiClock } from 'react-icons/fi';
 import styles from './post.module.scss';
 
-interface Post {
-  first_publication_date: string | null;
-  data: {
-    title: string;
-    banner: {
-      url: string;
-    };
-    author: string;
-    content: {
-      heading: string;
-      body: {
-        text: string;
-      }[];
-    }[];
-  };
-}
-
-interface PostProps {
-  post: Post;
-}
-
-// export default function Post() {
-//   // TODO
+// interface Post {
+//   first_publication_date: string | null;
+//   data: {
+//     title: string;
+//     banner: {
+//       url: string;
+//     };
+//     author: string;
+//     content: {
+//       heading: string;
+//       body: {
+//         text: string;
+//       }[];
+//     }[];
+//   };
 // }
+
+// interface PostProps {
+//   post: Post;
+// }
+
+export default function Post() {
+  return (
+    <>
+      <Head>
+        <title>Mudar Titulo | Ignews</title>
+      </Head>
+      <header className={styles.banner}>
+        <img
+          src="https://images.unsplash.com/photo-1564865878688-9a244444042a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+          alt="banner"
+        />
+      </header>
+
+      <main className={styles.container}>
+        {/* a tag article é usada para posts e artigos */}
+        <article className={styles.post}>
+          <h1>Como aprender ReactJS</h1>
+          <div className={commonStyles.info}>
+            <FiCalendar color="#bbbbbb" />
+            <time>02 de abril de 2021</time>
+            <FiUser color="#bbbbbb" />
+            <span>Joseph Oliveira</span>
+            <FiClock color="#bbbbbb" />
+            <time>4 min</time>
+          </div>
+          {/* dangerouslySetInnerHTML converte o html trazido do prismic
+         para que o react possa renderizalo corretamente.*/}
+          {/* !!!IMPORTANT!!!: usar dangerouslySetInnerHTML é perigoso,
+         pois pode permitir roubo de dados dos cookies.  */}
+          {/* Como aqui esta sendo usado somente para o prismic,
+         o prismic assegura o uso dele evitando isso. */}
+          <div
+            className={styles.postContent}
+            // dangerouslySetInnerHTML={{ __html: post.content }}
+          >
+            Mussum Ipsum, cacilds vidis litro abertis. Suco de cevadiss, é um
+            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Aenean
+            aliquam molestie leo, vitae iaculis nisl. Si u mundo tá muito
+            paradis? Toma um mé que o mundo vai girarzis! Paisis, filhis,
+            <a>espiritis santis</a>.
+            <br />
+            <br />
+            Mussum Ipsum, cacilds vidis litro abertis. Suco de cevadiss, é um
+            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Aenean
+            aliquam molestie leo, vitae iaculis nisl. Si u mundo tá muito
+            paradis? Toma um mé que o mundo vai girarzis! Paisis, filhis,
+            espiritis santis.
+            <br />
+            <br />
+            Mussum Ipsum, cacilds vidis litro abertis. Suco de cevadiss, é um
+            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Aenean
+            aliquam molestie leo, vitae iaculis nisl. Si u mundo tá muito
+            paradis? Toma um mé que o mundo vai girarzis! Paisis, filhis,
+            espiritis santis.
+            <br />
+            <br />
+            Mussum Ipsum, cacilds vidis litro abertis. Suco de cevadiss, é um
+            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Aenean
+            aliquam molestie leo, vitae iaculis nisl. Si u mundo tá muito
+            paradis? Toma um mé que o mundo vai girarzis! Paisis, filhis,
+            espiritis santis.
+          </div>
+        </article>
+      </main>
+    </>
+  );
+}
 
 // export const getStaticPaths = async () => {
 //   const prismic = getPrismicClient();

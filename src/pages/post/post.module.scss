@@ -1,1 +1,50 @@
-// TODO
+// color: var(--pink-500);
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.post {
+  max-width: 720px;
+  margin: 8rem auto 3rem;
+
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+  }
+
+  .postContent {
+    margin-top: 2rem;
+    line-height: 2rem;
+    font-size: 1.125rem;
+    color: var(--gray-100);
+
+    a {
+      color: var(--pink-500);
+    }
+
+    p,
+    ul {
+      margin-top: 1.5rem 0;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+
+      li {
+        margin: 0.5rem 0;
+      }
+    }
+  }
+}
+
+.banner {
+  height: 50vh;
+  display: block;
+  img {
+    height: 60vh;
+    width: 100%;
+    object-fit: cover;
+  }
+}
