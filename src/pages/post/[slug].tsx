@@ -6,6 +6,12 @@ import commonStyles from '../../styles/common.module.scss';
 import Head from 'next/head';
 import { FiCalendar, FiUser, FiClock } from 'react-icons/fi';
 import styles from './post.module.scss';
+import { RichText } from 'prismic-dom';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+import Header from '../../components/Header';
+import Prismic from '@prismicio/client';
+import { useRouter } from 'next/router';
 
 interface Post {
   first_publication_date: string | null;
@@ -29,16 +35,39 @@ interface PostProps {
 }
 
 export default function Post({ post }: PostProps) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <h1>Carregando...</h1>;
+  }
+
+  const formattedDate = format(
+    new Date(post.first_publication_date),
+    'dd MMM yyyy',
+    {
+      locale: ptBR,
+    }
+  );
+
+  const calcWords = post.data.content.reduce((total, contentWords) => {
+    total += contentWords.heading.split(' ').length;
+
+    const words = contentWords.body.map(
+      number => number.text.split(' ').length
+    );
+    words.map(word => (total += word));
+    return total;
+  }, 0);
+  const calcTime = Math.ceil(calcWords / 200);
+
   return (
     <>
       <Head>
         <title>{post.data.title} | spacetraveling</title>
       </Head>
+      <Header />
       <header className={styles.banner}>
-        <img
-          src="https://images.unsplash.com/photo-1564865878688-9a244444042a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-          alt="banner"
-        />
+        <img src={`${post.data.banner.url}`} alt="banner" />
       </header>
 
       <main className={styles.container}>
@@ -47,107 +76,76 @@ export default function Post({ post }: PostProps) {
           <h1>{post.data.title}</h1>
           <div className={commonStyles.info}>
             <FiCalendar color="#bbbbbb" />
-            <time>{post.first_publication_date}</time>
+            <time>{formattedDate}</time>
             <FiUser color="#bbbbbb" />
             <span>{post.data.author}</span>
             <FiClock color="#bbbbbb" />
-            <time>{post.first_publication_date}</time>
+            <span>{calcTime} min</span>
           </div>
-          {/* dangerouslySetInnerHTML converte o html trazido do prismic
-         para que o react possa renderizalo corretamente.*/}
-          {/* !!!IMPORTANT!!!: usar dangerouslySetInnerHTML é perigoso,
-         pois pode permitir roubo de dados dos cookies.  */}
-          {/* Como aqui esta sendo usado somente para o prismic,
-         o prismic assegura o uso dele evitando isso. */}
-          <div
-            className={styles.postContent}
-            // dangerouslySetInnerHTML={{ __html: post.content }}
-          >
-            Mussum Ipsum, cacilds vidis litro abertis. Suco de cevadiss, é um
-            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Aenean
-            aliquam molestie leo, vitae iaculis nisl. Si u mundo tá muito
-            paradis? Toma um mé que o mundo vai girarzis! Paisis, filhis,
-            <a>espiritis santis</a>.
-            <br />
-            <br />
-            Mussum Ipsum, cacilds vidis litro abertis. Suco de cevadiss, é um
-            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Aenean
-            aliquam molestie leo, vitae iaculis nisl. Si u mundo tá muito
-            paradis? Toma um mé que o mundo vai girarzis! Paisis, filhis,
-            espiritis santis.
-            <br />
-            <br />
-            Mussum Ipsum, cacilds vidis litro abertis. Suco de cevadiss, é um
-            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Aenean
-            aliquam molestie leo, vitae iaculis nisl. Si u mundo tá muito
-            paradis? Toma um mé que o mundo vai girarzis! Paisis, filhis,
-            espiritis santis.
-            <br />
-            <br />
-            Mussum Ipsum, cacilds vidis litro abertis. Suco de cevadiss, é um
-            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Aenean
-            aliquam molestie leo, vitae iaculis nisl. Si u mundo tá muito
-            paradis? Toma um mé que o mundo vai girarzis! Paisis, filhis,
-            espiritis santis.
-          </div>
+          {post.data.content.map(content => (
+            <article key={content.heading} className={styles.postContent}>
+              <h2>{content.heading}</h2>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: RichText.asHtml(content.body),
+                }}
+              />
+            </article>
+          ))}
         </article>
       </main>
     </>
   );
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const prismic = getPrismicClient();
-  const posts = await prismic.query(TODO);
+  const posts = await prismic.query([
+    Prismic.predicates.at('document.type', 'posts'),
+  ]);
 
-  // TODO
+  const paths = posts.results.map(post => {
+    return {
+      params: {
+        slug: post.uid,
+      },
+    };
+  });
+
+  return {
+    paths,
+    fallback: true,
+  };
 };
 
-// export const getStaticProps = async context => {
-//   const prismic = getPrismicClient();
-//   const response = await prismic.getByUID(TODO);
+export const getStaticProps: GetStaticProps = async context => {
+  const slug = context.params.slug;
+  const prismic = getPrismicClient();
 
-//   // TODO
-// };
-// export const getServerSideProps: GetServerSideProps = async ({
-//   req,
-//   params,
-// }) => {
-//   const session = await getSession({ req });
-//   const { slug } = params;
+  const response = await prismic.getByUID('posts', String(slug), {});
 
-//   if (!session?.activeSubscription) {
-//     return {
-//       redirect: {
-//         destination: `/posts/preview/${slug}`,
-//         permanent: false,
-//       },
-//     };
-//   }
+  const post = {
+    uid: response.uid,
+    first_publication_date: response.first_publication_date,
+    data: {
+      title: response.data.title,
+      subtitle: response.data.subtitle,
+      author: response.data.author,
+      banner: {
+        url: response.data.banner.url,
+      },
+      content: response.data.content.map(content => {
+        return {
+          heading: content.heading,
+          body: [...content.body],
+        };
+      }),
+    },
+  };
 
-//   const prismic = getPrismicClient(req);
-
-//   //query de busca por ID
-//   //slug = id
-//   const response = await prismic.getByUID('post', String(slug), {});
-
-//   const post = {
-//     slug,
-//     title: RichText.asText(response.data.title),
-//     content: RichText.asHtml(response.data.content),
-//     updatedAt: new Date(response.last_publication_date).toLocaleDateString(
-//       'pt-BR',
-//       {
-//         day: '2-digit',
-//         month: 'long',
-//         year: 'numeric',
-//       }
-//     ),
-//   };
-
-//   return {
-//     props: {
-//       post,
-//     },
-//   };
-// };
+  return {
+    props: {
+      post,
+    },
+  };
+};
