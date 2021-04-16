@@ -12,6 +12,11 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script
+            async
+            defer
+            src={`//static.cdn.prismic.io/prismic.js?new=true&repo=spacetravelingjd`}
+          />
         </body>
       </Html>
     )
