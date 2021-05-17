@@ -67,9 +67,10 @@ Space Traveling é um blog de tecnologia voltado a programação, com intenção
 #### Features:
 
 
-- [x] Listagem de posts na home.
+- [x] Listagem de posts na Home.
 - [x] Paginação da listagem de posts na Home.
-- [x] Paginação de post anterios e proximo nas paginas do Post.
+- [x] Pagina de Artigo com conteudo.
+- [x] Paginação de artigo anterios e proximo nas paginas do Post.
 - [x] Opção de comentario ligado ao perfil do Github.
 
 ---
