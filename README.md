@@ -100,7 +100,11 @@ Você pode visualizar o layout do projeto no formato através [desse link](https
   - **[Next.js][next]**
   - **[JSON Server][json_server]**
   - **[Axios][axios]**
-  - **[Sass][sass]**
+  - **[Sass][sass]*
+  - **[React Icons][react_icons]**
+  - **[Date_fns][date_fns]**
+  - **[Utteranc][utteranc]**
+  *
    
 > \* Veja o arquivo <kbd>[package.json](./package.json)</kbd>
 
@@ -220,7 +224,13 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 
 [sass]: https://sass-lang.com
 
+[react_icons]: https://react-icons.github.io/react-icons/
+
 [axios]: https://github.com/axios/axios
+
+[date_fns]: https://date-fns.org
+
+[utteranc]: https://utteranc.es
 
 [asdf]: https://github.com/asdf-vm/asdf
 
