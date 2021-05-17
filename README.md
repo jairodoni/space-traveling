@@ -138,13 +138,6 @@ $ yarn
 ### Executando o WebSite
 
 ```sh
-# Executando o json server:
-$ npm run server
-
-    OU
-    
-$ yarn server
-
 # Executando o website no modo de desenvolvimento:
 $ npm run dev
 
