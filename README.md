@@ -83,10 +83,10 @@ Você pode visualizar o layout do projeto no formato através [desse link](https
 
   <div>
     <br/>
-    <img style="border-radius: 0.5rem;" alt="telasWeb" src=".github/screen01.png" width="100%">
+    <img style="border-radius: 0.5rem;" alt="telasWeb" src=".github/screen01.gif" width="100%">
     <br/>
     <br/>
-    <img  style="border-radius: 0.5rem;" alt="telasWeb" src=".github/screen02.png" width="100%">
+    <img  style="border-radius: 0.5rem;" alt="telasWeb" src=".github/screen02.gif" width="100%">
   <div>
 
 ---
