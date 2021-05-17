@@ -37,9 +37,13 @@
     }
   }
 
-  a:last-child {
+  button:last-child {
     color: var(--pink-500);
-    font-weight: bold;
+    font-size: 1.2rem;
+    font-weight: 600;
     margin: 2rem 0 4rem;
+    border: none;
+    background: none;
+    margin-top: 3rem;
   }
 }

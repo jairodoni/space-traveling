@@ -1,8 +1,6 @@
-// color: var(--pink-500);
 .container {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 2rem;
 }
 
 .post {
@@ -23,9 +21,11 @@
     line-height: 2rem;
     font-size: 1.125rem;
     color: var(--gray-100);
+    
 
     a {
       color: var(--pink-500);
+      word-wrap: break-word;
     }
 
     p,
@@ -68,14 +68,34 @@
       color: var(--pink-500);
       font-weight: 600;
     }
-
+    
     div {
       max-width: 50%;
       width: 100%;
     }
-
+    
     div + div {
       text-align: right;
+    }
+  }
+  @media (max-width: 500px) {
+    width: 100vh;
+    margin: 5rem auto 3rem;
+    
+    padding: 1.6rem;
+    display: block;
+
+    h1 {
+      font-size: 2.8rem;
+    }
+    
+    .postContent {
+      word-wrap: break-word;
+      font-size: 1.8rem;
+      line-height: 3rem;
+    }
+    div + span {
+      font-size: 1.6rem;
     }
   }
 }
@@ -83,9 +103,14 @@
 .banner {
   height: 50vh;
   display: block;
+  
   img {
     height: 60vh;
     width: 100%;
     object-fit: cover;
+  }
+  
+  @media (max-width: 500px) {
+    width: 100vh;
   }
 }

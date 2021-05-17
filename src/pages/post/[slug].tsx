@@ -98,7 +98,6 @@ export default function Post({ post, navigation, preview }: PostProps) {
       <Head>
         <title>{post.data.title} | spacetraveling</title>
       </Head>
-      <Header />
       <header className={styles.banner}>
         <img src={`${post.data.banner.url}`} alt="banner" />
       </header>

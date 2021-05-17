@@ -89,8 +89,8 @@ export default function Home({ postsPagination, preview }: HomeProps): JSX.Eleme
       <Head>
         <title>Posts | spacetraveling</title>
       </Head>
+
       <main className={styles.container}>
-        <Header />
         <div className={styles.posts}>
           {posts.map(post => (
             <Link key={post.uid} href={`/post/${post.uid}`}>
@@ -109,9 +109,9 @@ export default function Home({ postsPagination, preview }: HomeProps): JSX.Eleme
           ))}
 
           {nextPage && (
-            <a href="#" onClick={handleNextPage}>
-              Carregar mais posts
-            </a>
+            <button onClick={handleNextPage}>
+              Carregar mais posts . . .
+            </button>
           )}
         </div>
         {preview && (
@@ -133,7 +133,7 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
   const response = await prismic.query(
     [Prismic.predicates.at('document.type', 'posts')],
     {
-      pageSize: 1,
+      pageSize: 3,
     }
   );
 
