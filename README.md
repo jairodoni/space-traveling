@@ -100,11 +100,11 @@ Você pode visualizar o layout do projeto no formato através [desse link](https
   - **[Next.js][next]**
   - **[JSON Server][json_server]**
   - **[Axios][axios]**
-  - **[Sass][sass]*
+  - **[Sass][sass]**
   - **[React Icons][react_icons]**
   - **[Date_fns][date_fns]**
   - **[Utteranc][utteranc]**
-  *
+  
    
 > \* Veja o arquivo <kbd>[package.json](./package.json)</kbd>
 
