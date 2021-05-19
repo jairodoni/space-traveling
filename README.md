@@ -98,8 +98,7 @@ Você pode visualizar o layout do projeto no formato através [desse link](https
  
   - **[Typescript][typescript]**
   - **[Next.js][next]**
-  - **[JSON Server][json_server]**
-  - **[Axios][axios]**
+  - **[Prismic CMS][prismic]**
   - **[Sass][sass]**
   - **[React Icons][react_icons]**
   - **[Date_fns][date_fns]**
@@ -214,7 +213,7 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 
 [node]: https://nodejs.org/en/
 
-[json_server]: https://github.com/typicode/json-server
+[prismic]: https://prismic.io
 
 [next]: https://nextjs.org/
 
@@ -225,8 +224,6 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 [sass]: https://sass-lang.com
 
 [react_icons]: https://react-icons.github.io/react-icons/
-
-[axios]: https://github.com/axios/axios
 
 [date_fns]: https://date-fns.org
 
