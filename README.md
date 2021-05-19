@@ -62,7 +62,7 @@
 
 ## **💻 Projeto**
 
-Space Traveling é um blog de tecnologia voltado a programação, com intenção de manter as pessoas antenadas nas atualidades e recursos que temos atualmente para deselvolvimento de softwares mais eficientes.
+Space Traveling é um blog de tecnologia voltado a programação, com intenção de manter as pessoas antenadas nas atualidades e recursos que temos atualmente para desenvolvimento de softwares mais eficientes.
 
 #### Features:
 
