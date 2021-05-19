@@ -87,7 +87,7 @@ export default function Home({ postsPagination, preview }: HomeProps): JSX.Eleme
   return (
     <>
       <Head>
-        <title>Posts | spacetraveling</title>
+        <title>Home | spacetraveling</title>
       </Head>
 
       <main className={styles.container}>
