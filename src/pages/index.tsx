@@ -1,5 +1,5 @@
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Header from '../components/Header';
 import Link from 'next/link';
 import { FiCalendar, FiUser } from 'react-icons/fi';
 import { GetStaticProps } from 'next';
@@ -8,9 +8,9 @@ import Prismic from '@prismicio/client';
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
-import { useState } from 'react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+
 
 interface Post {
   uid?: string;
@@ -31,6 +31,8 @@ interface HomeProps {
   postsPagination: PostPagination;
   preview: boolean;
 }
+
+
 
 export default function Home({ postsPagination, preview }: HomeProps): JSX.Element {
   const [nextPage, setNextPage] = useState(postsPagination.next_page);
@@ -83,6 +85,10 @@ export default function Home({ postsPagination, preview }: HomeProps): JSX.Eleme
 
     setPosts([...posts, ...morePosts]);
   }
+
+  useEffect(() => {
+    alert("AVISO: Esta pagina não esta ativa e não esta recebendo postagens de autores reais. Por enquanto servira apenas como demonstração.")
+  }, []);
 
   return (
     <>

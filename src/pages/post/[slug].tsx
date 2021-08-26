@@ -9,7 +9,6 @@ import styles from './post.module.scss';
 import { RichText } from 'prismic-dom';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import Header from '../../components/Header';
 import Prismic from '@prismicio/client';
 import { useRouter } from 'next/router';
 import Comments from '../../components/Comments';
@@ -132,7 +131,7 @@ export default function Post({ post, navigation, preview }: PostProps) {
                 <h3>{navigation.prevPost[0].data.title}</h3>
                 <Link href={`/post/${navigation.prevPost[0].uid}`}>
                   Post anterior
-              </Link>
+                </Link>
               </div>
             ) : (
               <div>
@@ -145,7 +144,7 @@ export default function Post({ post, navigation, preview }: PostProps) {
                 <h3>{navigation.nextPost[0].data.title}</h3>
                 <Link href={`/post/${navigation.nextPost[0].uid}`}>
                   Proximo post
-              </Link>
+                </Link>
               </div>
             ) : (
               <div>
